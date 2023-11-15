@@ -18,4 +18,14 @@ public class Punctuation {
   public char getCharacter() {
     return character;
   }
+
+  /**
+   * Returns a string representation of the Punctuation object.
+   *
+   * @return A string representation of the Punctuation object.
+   */
+  @Override
+  public String toString() {
+    return String.valueOf(character);
+  }
 }

@@ -16,7 +16,7 @@ public class Text {
 
       if (currentChar == '.' || currentChar == '!' || currentChar == '?') {
         sentences.add(new Sentence(new StringBuilder(text.substring(start, end + 1))));
-        start = end + 1;
+        start = end + 2;
       }
     }
 
@@ -32,5 +32,18 @@ public class Text {
    */
   public ArrayList<Sentence> getSentences() {
     return sentences;
+  }
+
+  /**
+   * Returns a string representation of the Text object.
+   *
+   * @return A string representation of the Text object.
+   */
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    for (Sentence sentence : sentences) {
+      result.append(sentence).append(" ");
+    }
+    return result.toString().trim();
   }
 }

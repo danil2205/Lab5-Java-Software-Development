@@ -16,7 +16,6 @@ public class Sentence {
 
   /**
    * Split the words from sentence.
-   *
    */
   public void splitWords() {
     StringBuilder word = new StringBuilder();
@@ -25,10 +24,6 @@ public class Sentence {
     for (int i = 0; i < sentence.length() - 1; i++) {
       char currentChar = sentence.charAt(i);
 
-      if (!Character.isLetterOrDigit(currentChar)) {
-        elements.add(new Punctuation(currentChar));
-      }
-
       if (Character.isWhitespace(currentChar)) {
         if (inWord) {
           elements.add(new Word(word));
@@ -36,14 +31,16 @@ public class Sentence {
           inWord = false;
         }
       } else {
-        word.append(Character.toLowerCase(currentChar));
+        word.append(currentChar);
         inWord = true;
       }
     }
 
     if (inWord) {
-      elements.add(word);
+      elements.add(new Word(word));
     }
+
+    elements.add(new Punctuation(sentence.charAt(sentence.length() - 1)));
   }
 
   /**
@@ -53,5 +50,23 @@ public class Sentence {
    */
   public ArrayList<Object> getElements() {
     return elements;
+  }
+
+  /**
+   * Returns a string representation of the Sentence object.
+   *
+   * @return A string representation of the Sentence object.
+   */
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    int lastIndex = elements.size() - 1;
+
+    for (int i = 0; i < elements.size(); i++) {
+      if (i != lastIndex) result.append(" ");
+      result.append(elements.get(i));
+    }
+
+    return result.toString().trim();
   }
 }
